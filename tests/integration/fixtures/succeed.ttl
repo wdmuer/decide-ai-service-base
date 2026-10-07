@@ -1,0 +1,11 @@
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix task: <http://redpencil.data.gift/vocabularies/tasks/> .
+@prefix mu:   <http://mu.semte.ch/vocabularies/core/> .
+
+<http://example.org/test/task/succeed>
+    a task:Task ;
+    mu:uuid "test-task-succeed" ;
+    adms:status <http://redpencil.data.gift/id/concept/JobStatus/scheduled> ;
+    task:operation <http://example.org/test/operation/succeed> ;
+    dct:isPartOf <http://example.org/test/job/succeed> .

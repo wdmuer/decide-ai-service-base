@@ -1,0 +1,3 @@
+services:
+  ai:
+    image: example/ai:1.0.0

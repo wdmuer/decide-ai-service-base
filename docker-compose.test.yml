@@ -1,0 +1,27 @@
+services:
+  # Some library queries run without a GRAPH clause, relying on sparql-parser to inject
+  # graphs in production. There is no sparql-parser here, so this works only because
+  # this image unions the named graphs into the default graph.
+  virtuoso:
+    image: redpencil/virtuoso:1.4.0
+    environment:
+      SPARQL_UPDATE: "true"
+
+  tests:
+    image: semtech/mu-python-template:feature-fastapi
+    depends_on:
+      - virtuoso
+    working_dir: /tmp/lib
+    environment:
+      MU_SPARQL_ENDPOINT: http://virtuoso:8890/sparql
+      MU_SPARQL_UPDATEPOINT: http://virtuoso:8890/sparql
+      MU_SPARQL_TIMEOUT: "120"
+      ALLOW_MU_AUTH_SUDO: "true"
+      LOG_SPARQL_ALL: "False"
+      COMPOSE_FILE: /tmp/lib/tests/integration/fixtures/service-compose.yml
+      COMPOSE_SERVICE: ai
+    volumes:
+      - .:/src:ro
+    entrypoint: ["sh", "-c"]
+    # Installing writes build files into the source tree, so the read-only checkout is copied first.
+    command: ['cp -r /src/. /tmp/lib && uv pip install -q "/tmp/lib[dev]" && uv run --no-project python -m pytest']

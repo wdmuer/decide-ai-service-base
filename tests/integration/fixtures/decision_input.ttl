@@ -1,0 +1,32 @@
+@prefix adms:   <http://www.w3.org/ns/adms#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix task:   <http://redpencil.data.gift/vocabularies/tasks/> .
+@prefix mu:     <http://mu.semte.ch/vocabularies/core/> .
+@prefix nfo:    <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix eli:    <http://data.europa.eu/eli/ontology#> .
+@prefix eli-dl: <http://data.europa.eu/eli/eli-draft-legislation-ontology#> .
+@prefix epvoc:  <https://data.europarl.europa.eu/def/epvoc#> .
+
+<http://example.org/test/task/decision>
+    a task:Task ;
+    mu:uuid "test-task-decision" ;
+    adms:status <http://redpencil.data.gift/id/concept/JobStatus/scheduled> ;
+    task:operation <http://example.org/test/operation/decision> ;
+    task:inputContainer <http://example.org/test/container/decision-input> ;
+    dct:isPartOf <http://example.org/test/job/decision> .
+
+<http://example.org/test/container/decision-input>
+    a nfo:DataContainer ;
+    mu:uuid "test-container-decision-input" ;
+    task:hasResource <http://example.org/test/expression/decision> .
+
+<http://example.org/test/expression/decision>
+    a eli:Expression ;
+    epvoc:expressionContent "The council approves the budget." ;
+    eli:title "Budget 2026" ;
+    eli:description "Budget 2026" ;
+    eli-dl:decision_basis "Article 12 of the municipal decree" ;
+    eli:realizes <http://example.org/test/work/decision> .
+
+<http://example.org/test/work/decision>
+    a eli:Work .
