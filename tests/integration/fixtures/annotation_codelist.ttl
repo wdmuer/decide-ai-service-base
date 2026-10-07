@@ -1,0 +1,5 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/> .
+
+<http://example.org/test/activity/linking> dct:isPartOf <http://example.org/test/job/linking> .
+<http://example.org/test/job/linking> ext:codelist <http://example.org/test/codelist/types> .
